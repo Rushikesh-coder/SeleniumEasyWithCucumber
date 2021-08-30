@@ -195,23 +195,55 @@ public class StepDefSeleniumEasy extends BaseTest{
 	}
 	
 	//Radio button
-	@Given("header of radio button demo page is displayed")
+	@Given("click on DropDown TopUp of {string} and select {string}")
+	public void click_on_drop_down_top_up_of_and_select(String string, String string2) {
+		objSeleniumEasyHomePage.getAllDropDownsFields(string);
+		objSeleniumEasyHomePage.getvaluesOfDropDown(string2);
+	}
+
+	
+	@And("header of radio button demo page is displayed")
 	public void header_of_radio_button_demo_page_is_displayed() {
 	   objRadioButtonDemoPage.verifyHeaderTextOfRedioButtonPageIsDisplayed();
 	}
 
-	@When("user click on radio button")
+	@And("user click on radio button")
 	public void user_click_on_radio_button() {
 		objRadioButtonDemoPage.clickOnRedioButton("Female");
 	}
-
-	@When("user verify Result of RadioButton")
-	public void user_verify_result_of_radio_button() {
+	
+	@And("user click on getCheckedValue button")
+	public void user_click_on_get_checked_value_button() {
 		objRadioButtonDemoPage.clickonGetCheckedValueButton();
+	}
+
+	@And("user verify Result of RadioButton")
+	public void user_verify_result_of_radio_button() {
+		
 		objRadioButtonDemoPage.checkResult();
 	}
 	
-	@Then("user Close the Browser")
+	@And("select Gender as {string}")
+	public void select_gender_as(String string) {
+	   objRadioButtonDemoPage.clickOnGroupRedioButtonsGender(string);
+	}
+	
+	@And("Select Age as {string}")
+	public void select_age_as(String string) {
+	    objRadioButtonDemoPage.clickOnGroupRedioButtonAge(string);
+	}
+	
+	@And("click on get value button")
+	public void click_on_get_value_button() {
+	   objRadioButtonDemoPage.clickonGetValueButton();
+	}
+	
+	@Then("verify values that user entered")
+	public void verify_values_that_user_entered() {
+	    objRadioButtonDemoPage.checkGroutRedioResult();
+	}
+	
+	@And("user Close the Browser")
 	public void user_close_the_browser() {
 	   this.tearDownEnvirnment();
 	}

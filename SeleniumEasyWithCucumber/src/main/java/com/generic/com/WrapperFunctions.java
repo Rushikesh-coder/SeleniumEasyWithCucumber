@@ -78,7 +78,7 @@ public class WrapperFunctions {
 		objWebDriverWait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 	
-	public void setFluentWait(By locator)
+	public void setFluentWait(final By locator)
 	{
 		Wait<WebDriver> wait =new FluentWait<WebDriver>(objBaseTest.getDriver())
 				.withTimeout(Duration.ofSeconds(90))
@@ -87,7 +87,6 @@ public class WrapperFunctions {
 		
 		WebElement webElement =wait.until(new Function<WebDriver, WebElement>() {
 
-			@Override
 			public WebElement apply(WebDriver t) {
 				return objBaseTest.getDriver().findElement(locator);
 			}
