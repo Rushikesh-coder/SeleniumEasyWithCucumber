@@ -26,10 +26,11 @@ public class WrapperFunctions {
 		this.objBaseTest = baseTest;
 	}
 
-	public void webDriverWaitObject()
-	{
-		 objWebDriverWait = new WebDriverWait(objBaseTest.getDriver(), Integer.parseInt(objBaseTest.objConfig.getProperty("setExplicitlyWait")));
+	public void webDriverWaitObject() {
+		objWebDriverWait = new WebDriverWait(objBaseTest.getDriver(),
+				Integer.parseInt(objBaseTest.objConfig.getProperty("setExplicitlyWait")));
 	}
+
 	public boolean checkElementIsDisplayed(By locator) {
 		this.setExplicitlyWait(locator);
 		boolean blnFlag = false;
@@ -53,50 +54,72 @@ public class WrapperFunctions {
 	public void setImplicitlyWait(int intTimeInSecond) {
 		objBaseTest.getDriver().manage().timeouts().implicitlyWait(intTimeInSecond, TimeUnit.SECONDS);
 	}
-	
-	public void setExplicitlyWait(By locator)  throws NotFoundException
-	{
+
+	public void setExplicitlyWait(By locator) throws NotFoundException {
 		this.webDriverWaitObject();
 		objWebDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
-	
-	public void checkElementpresenceInDom(By locator) throws NotFoundException
-	{
+
+	public void checkElementpresenceInDom(By locator) throws NotFoundException {
 		this.webDriverWaitObject();
 		objWebDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
-	
-	public void waitUntilElementSelect(By locator)
-	{
-	this.webDriverWaitObject();
-	objWebDriverWait.until(ExpectedConditions.elementToBeSelected(locator));
+
+	public void waitUntilElementSelect(By locator) {
+		this.webDriverWaitObject();
+		objWebDriverWait.until(ExpectedConditions.elementToBeSelected(locator));
 	}
-	
-	public void waitUntilButtonIsClickable(By locator)
-	{
+
+	public void waitUntilButtonIsClickable(By locator) {
 		this.webDriverWaitObject();
 		objWebDriverWait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
-	
-	public void setFluentWait(final By locator)
-	{
-		Wait<WebDriver> wait =new FluentWait<WebDriver>(objBaseTest.getDriver())
-				.withTimeout(Duration.ofSeconds(90))
-				.pollingEvery(Duration.ofSeconds(2))
-				.ignoring(NoSuchElementException.class,TimeoutException.class);
-		
-		WebElement webElement =wait.until(new Function<WebDriver, WebElement>() {
+
+	public void setFluentWait(final By locator) {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(objBaseTest.getDriver()).withTimeout(Duration.ofSeconds(90))
+				.pollingEvery(Duration.ofSeconds(2)).ignoring(NoSuchElementException.class, TimeoutException.class);
+
+		WebElement webElement = wait.until(new Function<WebDriver, WebElement>() {
 
 			public WebElement apply(WebDriver t) {
 				return objBaseTest.getDriver().findElement(locator);
 			}
 		});
 	}
-	
-	public void navigateToHomePage()
-	{
-		
+
+	// Element to be clickable
+	public boolean elementIsclickable(By locator) {
+		try {
+
+			this.webDriverWaitObject();
+			objWebDriverWait.until(ExpectedConditions.elementToBeClickable(locator));
+			return true;
+		} catch (Exception exception) {
+
+			System.out.println("I got Exception " + exception.getMessage());
+			exception.printStackTrace();
+			return false;
+		}
+
+	}
+
+	public void navigateToHomePage() {
+
 		objBaseTest.getDriver().findElement(By.xpath("//a[text()='Demo Home']")).click();
 	}
+
 	
+
+//	//ceck text is displayed
+//	public boolean checkIsTextIsVisble(By locator)
+//	{
+//		try {
+//		       
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		return false;
+//		
+//	}
+
 }
