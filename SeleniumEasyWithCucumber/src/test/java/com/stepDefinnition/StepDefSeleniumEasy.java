@@ -25,8 +25,9 @@ public class StepDefSeleniumEasy extends BaseTest {
 	public CheckBoxDemoPage objCheckBoxDemoPage;
 	public RadioButtonDemoPage objRadioButtonDemoPage;
 	public TableFilterDemoPage objTableFilterDemoPage;
-	
-    private String testData= "";
+
+	private String testData = "";
+
 	public StepDefSeleniumEasy() {
 
 		objSeleniumEasyHomePage = new SeleniumEasyHomePage(this);
@@ -34,7 +35,7 @@ public class StepDefSeleniumEasy extends BaseTest {
 		objBootStrapAlertPage = new BootStrapAlertPage(this);
 		objCheckBoxDemoPage = new CheckBoxDemoPage(this);
 		objRadioButtonDemoPage = new RadioButtonDemoPage(this);
-		objTableFilterDemoPage=new TableFilterDemoPage(this);
+		objTableFilterDemoPage = new TableFilterDemoPage(this);
 	}
 
 	@Given("user launch chrome browser and navigate to URL")
@@ -253,10 +254,9 @@ public class StepDefSeleniumEasy extends BaseTest {
 	public void click_on_all_dropdown_on_the_home_page(DataTable testDataTable) {
 		List<Map<String, String>> listOfDropDown = testDataTable.asMaps(String.class, String.class);
 		for (int intIndex = 0; intIndex < listOfDropDown.size(); intIndex++) {
-			
-			testData= listOfDropDown.get(intIndex).get("DropDownName");
-			if(!testData.equals(""))
-			{
+
+			testData = listOfDropDown.get(intIndex).get("DropDownName");
+			if (!testData.equals("")) {
 				objSeleniumEasyHomePage.getAllDropDownsFields(testData);
 			}
 		}
@@ -264,33 +264,31 @@ public class StepDefSeleniumEasy extends BaseTest {
 
 	@Given("user click on the DropDown {string} and select {string}")
 	public void user_click_on_the_drop_down_and_select(String strDropDown, String strValue) {
-	   
+
 		objSeleniumEasyHomePage.getAllDropDownsFields(strDropDown);
 		objSeleniumEasyHomePage.getvaluesOfDropDown(strValue);
 	}
-	
+
 	@When("user is on the Table filter page")
 	public void user_is_on_the_table_filter_page() {
-	  objTableFilterDemoPage.verifyHeaderOfPageIsDisplayed();
-		
+		objTableFilterDemoPage.verifyHeaderOfPageIsDisplayed();
+
 	}
 
 	@When("user can click the buttons to use filter")
 	public void user_can_click_the_buttons_to_use_filter(DataTable testDataTableFilter) {
-	   List<Map<String, String>> listOfFilter=testDataTableFilter.asMaps(String.class,String.class);
-	   
-	   for (int intIndex = 0; intIndex < listOfFilter.size(); intIndex++) {
-		
-		   testData=listOfFilter.get(intIndex).get("FilterButtons");
-		   
-		   if(!testData.equals(""))
-		   {
-			   objTableFilterDemoPage.clickButtonToFilterDetails(testData);
-		   }
+		List<Map<String, String>> listOfFilter = testDataTableFilter.asMaps(String.class, String.class);
+
+		for (int intIndex = 0; intIndex < listOfFilter.size(); intIndex++) {
+
+			testData = listOfFilter.get(intIndex).get("FilterButtons");
+
+			if (!testData.equals("")) {
+				objTableFilterDemoPage.clickButtonToFilterDetails(testData);
+			}
+		}
 	}
-	}
-	
-	
+
 	@And("user Close the Browser")
 	public void user_close_the_browser() {
 		this.tearDownEnvirnment();

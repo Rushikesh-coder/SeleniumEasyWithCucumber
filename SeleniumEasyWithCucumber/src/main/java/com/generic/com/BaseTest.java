@@ -20,8 +20,8 @@ public class BaseTest {
 		driver = new ChromeDriver();
 		objWrapperFunctions = new WrapperFunctions(this);
 		this.setObjWrapperFunctions(objWrapperFunctions);
-		driver.get(objConfig.getProperty("AUT_URL"));
-//		driver.get(url);
+//		driver.get(objConfig.getProperty("AUT_URL"));
+		driver.get("https://demoqa.com/text-box");
 		driver.manage().window().maximize();
 		
 		this.getObjWrapperFunctions().setImplicitlyWait(Integer.parseInt(objConfig.getProperty("setInmplicitlyWait")));

@@ -1,4 +1,4 @@
-@DropdownTest
+@DummyTest
 Feature: Verify Selnium easy Home page topup is clickable
 
   Background: 
